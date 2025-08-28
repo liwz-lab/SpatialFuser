@@ -1,0 +1,11 @@
+4. Weakly correlated multi-omics datasets across different resolution
+======================================================================
+Pair-wise integration and alignment of transcriptomic (MAGIC-seq), proteomic (PLATO), and metabolomic (MALDI-MSI) data obtained from consecutive mouse cerebellum tissue slices
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Contents:
+
+   4.1. Transcriptomics-Proteomics/RNA-Prot
+   4.2. Transcriptomics-Metabolomics/RNA-Metab
+   4.3. Proteomics-Metabolomics/Prot-Metab

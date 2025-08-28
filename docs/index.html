@@ -1,0 +1,217 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SpatialFuser: Universal Framework for Spatial Multi-Omics Data Integrative Analysis &mdash; SpatialFuser v1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5cb08e4e"></script>
+      <script src="_static/doctools.js?v=9a2dae69"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installation" href="Installation/contents.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            SpatialFuser
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Installation/contents.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="API.html">API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">SpatialFuser</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">SpatialFuser: Universal Framework for Spatial Multi-Omics Data Integrative Analysis</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="spatialfuser-universal-framework-for-spatial-multi-omics-data-integrative-analysis">
+<h1>SpatialFuser: Universal Framework for Spatial Multi-Omics Data Integrative Analysis<a class="headerlink" href="#spatialfuser-universal-framework-for-spatial-multi-omics-data-integrative-analysis" title="Link to this heading"></a></h1>
+<p>SpatialFuster is a unified framework for fine-grained single-slice analysis and cross-sample integrative analysis across modalities including epigenomics, transcriptomics, proteomics, and metabolomics.</p>
+<a class="reference internal image-reference" href="_images/SpatialFuser.png"><img alt="SpatialFuser overview" class="align-right" src="_images/SpatialFuser.png" style="width: 1400px;" />
+</a>
+</section>
+<section id="key-applications-of-spatialfuser">
+<h1>Key Applications of SpatialFuser<a class="headerlink" href="#key-applications-of-spatialfuser" title="Link to this heading"></a></h1>
+<ol class="arabic">
+<li><p><strong>Fine Spatial Interpretation:</strong></p>
+<p>As the first method designed for universal inference of spatial multi-omics, SpatialFuser leverages the MCGATE module to accurately detect spatial distributions of tissue domains or cell types across diverse modalities and technology platforms, including highly heterogeneous tumor tissues.</p>
+</li>
+<li><p><strong>Accurate Cross-Slice Alignment:</strong></p>
+<p>SpatialFuser provides multiple coordinate registration strategies tailored to different alignment scenarios：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>ICP algorithm</strong> for slices with well-defined structural grids or regular anatomical boundaries.</p></li>
+<li><p><strong>NDT algorithm</strong> for sparse, noisy, or irregular spot distributions.</p></li>
+</ul>
+</div></blockquote>
+<p>By coupling alignment and integration, SpatialFuser jointly addresses these two tasks through an iteratively trained dual-layer architecture consisting of a matching layer based on the Sinkhorn algorithm and a fusion layer grounded in contrastive learning. This design enables:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>Continuous slices alignment</strong>: ensuring smooth reconstruction of three-dimensional tissue structures.</p></li>
+<li><p><strong>Align slices across differnt developmental stages</strong>: capturing dynamic reorganization of tissue morphology during growth or regeneration.</p></li>
+<li><p><strong>Cross-resolution alignment</strong>: harmonizing datasets acquired from different platform.</p></li>
+<li><p><strong>Cross-modality alignment</strong>: registering tissue slices across different molecular layers.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Spatial Muti-Omics Data Integration:</strong></p>
+<p>SpatialFuser can effectively capture shared spatial molecular patterns across the different omics layers to correct modality bias. Its design offers several key advantages:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>Broad modality coverage</strong>: supports diverse data types including epigenomics, transcriptomics, proteomics, and metabolomics.</p></li>
+<li><p><strong>Robust cross-modality integration</strong>: applicable to both strongly correlated omics(e.g., genome–transcriptome with near one-to-one correspondence) and weakly correlated modalities(e.g., transcriptome–proteome).</p></li>
+<li><p><strong>Prevention of over-integration</strong>: achieved through strict anchor selection and reconstruction supervision, ensuring that modality-specific features are preserved and biologically meaningful variation is not lost.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ol>
+</section>
+<section id="application-examples">
+<h1>Application Examples<a class="headerlink" href="#application-examples" title="Link to this heading"></a></h1>
+<ol class="arabic simple">
+<li><p><strong>Fine Spatial Interpretation</strong></p>
+<ul class="simple">
+<li><p>Detection of spatial domains in the <strong>10X Visium</strong> DLPFC dataset.</p></li>
+<li><p>Detection of spatial domains in the <strong>osmFISH</strong> mouse somatosensory cortex dataset.</p></li>
+<li><p>Detection of main celltype distribution in the <strong>CODEX</strong> human muscle-invasive bladder cancer tumor dataset.</p></li>
+</ul>
+</li>
+<li><p><strong>Integration and Alignment</strong></p>
+<ul class="simple">
+<li><p>Integration and alignment of adjacent slices from the <strong>BaristaSeq</strong> mouse visual cortex dataset.</p></li>
+<li><p>Integration and alignment of <strong>Stereo-seq</strong> data representing axolotl regenerative telencephalon at developmental stages 54 and 57.</p></li>
+<li><p>Integration of homologous <strong>Spatial ATAC–RNA-seq</strong> slices.</p></li>
+<li><p>Integration and alignment of transcriptomic (<strong>MAGIC-seq</strong>), proteomic (<strong>PLATO</strong>), and metabolomic (<strong>MALDI-MSI</strong>) data obtained from consecutive mouse cerebellum tissue slices.</p></li>
+</ul>
+</li>
+</ol>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Installation/contents.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tutorials/index.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Tutorials/Fine%20Spatial%20Interpretation/index.html">Fine Spatial Interpretation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Tutorials/Fine%20Spatial%20Interpretation/1.%2010X%20Visium%20human%20DLPFC%20dataset/10X%20Visium%20DLPFC.html">1. 10X Visium human DLPFC dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tutorials/Fine%20Spatial%20Interpretation/2.%20osmFISH%20mouse%20somatosensory%20cortex%20dataset/osmFISH.html">2. osmFISH mouse somatosensory cortex datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tutorials/Fine%20Spatial%20Interpretation/3.%20CODEX%20human%20muscle-invasive%20bladder%20cancer%20tumor%20dataset/CODEX.html">3. CODEX human bladder cancer tumor dataset</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Tutorials/Integration%20and%20Alignment/index.html">Integration and Alignment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Tutorials/Integration%20and%20Alignment/1.%20Adjacent%20slices/BaristaSeq%20Alignment%20and%20Integration.html">1. Adjacent slices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tutorials/Integration%20and%20Alignment/2.%20Slices%20of%20different%20developmental%20stages/Setero-seq%20Alignment%20and%20Integration.html">2. Slices of different developmental stages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tutorials/Integration%20and%20Alignment/3.%20Spatial%20ATAC%E2%80%93RNA-seq%20dataset/Spatial%20ATAC-RNA-seq%20Integration.html">3. Spatial ATAC–RNA-seq dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tutorials/Integration%20and%20Alignment/4.%20Weakly%20correlated%20multi-omics%20datasets%20across%20different%20resolution/index.html">4. Weakly correlated multi-omics datasets across different resolution</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="API.html">API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="API.html#preparation">Preparation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/SpatialFuser.utils.html">SpatialFuser.utils</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="API.html#data-loader-and-pre-processing">Data loader and Pre-processing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/SpatialFuser.dataLoader.html">SpatialFuser.dataLoader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/SpatialFuser.preMatch.html">SpatialFuser.preMatch</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="API.html#training">Training</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/SpatialFuser.train.html">SpatialFuser.train</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="API.html#evaluation-and-visualization">Evaluation and Visualization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/SpatialFuser.enval.html">SpatialFuser.enval</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/SpatialFuser.vis.html">SpatialFuser.vis</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="citation">
+<h1>Citation<a class="headerlink" href="#citation" title="Link to this heading"></a></h1>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Installation/contents.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Wenhao Cai.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,389 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>1. 10X Visium human DLPFC dataset &mdash; SpatialFuser v1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/nbsphinx-code-cells.css?v=2aa19091" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=5cb08e4e"></script>
+      <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="2. osmFISH mouse somatosensory cortex datasets" href="../2.%20osmFISH%20mouse%20somatosensory%20cortex%20dataset/osmFISH.html" />
+    <link rel="prev" title="Fine Spatial Interpretation" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            SpatialFuser
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../Installation/contents.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Tutorials</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Fine Spatial Interpretation</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">1. 10X Visium human DLPFC dataset</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Preparation">Preparation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Hyper-Parameters-setting">Hyper-Parameters setting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Load-data">Load data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Train-MCGATE">Train MCGATE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Show-trainable-parameters-number">Show trainable parameters number</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Evaluation-and-plot-based-on-mclust">Evaluation and plot based on mclust</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../2.%20osmFISH%20mouse%20somatosensory%20cortex%20dataset/osmFISH.html">2. osmFISH mouse somatosensory cortex datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../3.%20CODEX%20human%20muscle-invasive%20bladder%20cancer%20tumor%20dataset/CODEX.html">3. CODEX human bladder cancer tumor dataset</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../Integration%20and%20Alignment/index.html">Integration and Alignment</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../API.html">API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">SpatialFuser</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Tutorials</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Fine Spatial Interpretation</a></li>
+      <li class="breadcrumb-item active">1. 10X Visium human DLPFC dataset</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/Tutorials/Fine Spatial Interpretation/1. 10X Visium human DLPFC dataset/10X Visium DLPFC.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="1.-10X-Visium-human-DLPFC-dataset">
+<h1>1. 10X Visium human DLPFC dataset<a class="headerlink" href="#1.-10X-Visium-human-DLPFC-dataset" title="Link to this heading"></a></h1>
+<p>In this vignette, we demonstrate how to use SpatialFuser to identify spatial domains in the DLPFC dataset. For illustration, only slice 151672 is used as an example.</p>
+<p>Slice 151672 provides whole-transcriptome coverage with 33,438 gene features across 4,015 spatially resolved spots.</p>
+<section id="Preparation">
+<h2>Preparation<a class="headerlink" href="#Preparation" title="Link to this heading"></a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">spatialFuser</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scanpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sc</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;..&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/home/whcai/anaconda3/envs/PyG/lib/python3.9/site-packages/louvain/__init__.py:54: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools&lt;81.
+  from pkg_resources import get_distribution, DistributionNotFound
+</pre></div></div>
+</div>
+</section>
+<section id="Hyper-Parameters-setting">
+<h2>Hyper-Parameters setting<a class="headerlink" href="#Hyper-Parameters-setting" title="Link to this heading"></a></h2>
+<p>All hyperparameters are stored in the variable args. To display them during initialization, use the function call <em>args = def_training_args(show_detail=True)</em>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load args:</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;============================================&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=              Setting Params              =&quot;</span><span class="p">)</span>
+<span class="n">args</span> <span class="o">=</span> <span class="n">def_training_args</span><span class="p">()</span>
+<span class="n">args</span><span class="o">.</span><span class="n">epochs</span> <span class="o">=</span> <span class="mi">500</span>
+<span class="n">args</span><span class="o">.</span><span class="n">K</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="n">args</span><span class="o">.</span><span class="n">step</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">args</span><span class="o">.</span><span class="n">heads</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">args</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">args</span><span class="o">.</span><span class="n">lr</span> <span class="o">=</span> <span class="mf">2e-3</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+============================================
+=              Setting Params              =
+</pre></div></div>
+</div>
+</section>
+<section id="Load-data">
+<h2>Load data<a class="headerlink" href="#Load-data" title="Link to this heading"></a></h2>
+<p>SpatialFuser provides a built-in data loading and preprocessing module, <em>SpatialFuserDataLoader</em>. The required inputs include hyperparameters, data_dir (the dataset storage directory), data_tech (either “seq-based” or “image-based”), and files (a list of h5ad files to be loaded).</p>
+<p>For spatial omics data, <em>SpatialFuserDataLoader</em> constructs a KNN adjacency graph based on the specified value of K to support graph neural network training.</p>
+<p>For seq-based data, spatially variable genes are extracted according to n_svgs to simplify the model.</p>
+<p>All AnnData objects are normalized, log-transformed, and subsequently converted into PyG objects for model input.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load data:</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;============================================&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=               Loading Data               =&quot;</span><span class="p">)</span>
+<span class="n">loadtime</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">dataLoader</span> <span class="o">=</span> <span class="n">SpatialFuserDataLoader</span><span class="p">(</span><span class="n">args</span><span class="p">,</span>
+                                    <span class="n">data_dir</span><span class="o">=</span><span class="s1">&#39;/public8/lilab/student/whcai/Integration/data/10X_DLPFC&#39;</span><span class="p">,</span>
+                                    <span class="n">data_tech</span><span class="o">=</span><span class="s1">&#39;seq-based&#39;</span><span class="p">,</span>
+                                    <span class="n">files</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;10X_Visium_maynard2021trans_151672_data.h5ad&#39;</span><span class="p">])</span>
+<span class="n">dataLoader</span><span class="o">.</span><span class="n">load_adata</span><span class="p">()</span>
+<span class="c1"># dataLoader.remove_nan(obs_name=&#39;Region&#39;)</span>
+<span class="n">dataLoader</span><span class="o">.</span><span class="n">pre_processing</span><span class="p">(</span><span class="n">n_svgs</span><span class="o">=</span><span class="mi">3000</span><span class="p">,</span> <span class="n">k_cutoff</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">K</span><span class="p">,</span> <span class="n">batch_label</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">dataLoader</span><span class="o">.</span><span class="n">generate_minibatch</span><span class="p">(</span><span class="n">loader_type</span><span class="o">=</span><span class="s1">&#39;RandomNodeLoader&#39;</span><span class="p">,</span> <span class="n">num_workers</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+============================================
+=               Loading Data               =
+WARNING: adata.X seems to be already log-transformed.
+=         Calculating spatial graph        =
+The PyG data u create is qualified
+=The graph contains 28105 edges, 4015 cells=
+=   7.0000 neighbors per cell on average   =
+=              subgraph Info             =
+============================================
+=           Batch 0: 4015 nodes           =
+=   6.0000 neighbors per cell on average   =
+batch:[1.], node num:[4015]
+============================================
+</pre></div></div>
+</div>
+</section>
+<section id="Train-MCGATE">
+<h2>Train MCGATE<a class="headerlink" href="#Train-MCGATE" title="Link to this heading"></a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="c1"># train</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;============================================&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=              Begin to Train              =&quot;</span><span class="p">)</span>
+<span class="n">training_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">adata</span><span class="p">,</span> <span class="n">trainer</span><span class="p">,</span> <span class="n">loss_list</span> <span class="o">=</span> <span class="n">train_emb</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">dataLoader</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=            Training Finished!            =&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total time elapsed: </span><span class="si">{:.4f}</span><span class="s2">s&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">training_time</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;============================================&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+============================================
+=              Begin to Train              =
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+Epoch500 || loss: 0.1563 || MNN num: [0]: 100%|███████████████████████████████████████| 500/500 [00:27&lt;00:00, 18.23it/s]
+/public8/lilab/student/whcai/Integration/model/SpatialFuser/spatialFuser/train.py:392: ImplicitModificationWarning: Trying to modify attribute `._uns` of view, initializing view as actual.
+  dataLoader.adata.uns[&#39;MCGATE_loss&#39;] = loss_list
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+=            Training Finished!            =
+Total time elapsed: 28.1016s
+============================================
+</pre></div></div>
+</div>
+</section>
+<section id="Show-trainable-parameters-number">
+<h2>Show trainable parameters number<a class="headerlink" href="#Show-trainable-parameters-number" title="Link to this heading"></a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="c1"># show param number</span>
+<span class="n">total_params</span><span class="p">,</span> <span class="n">total_trainable_params</span> <span class="o">=</span> <span class="n">show_para_num</span><span class="p">(</span><span class="n">trainer</span><span class="o">.</span><span class="n">model</span><span class="p">)</span>
+<span class="n">param_num</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;total_params&#39;</span><span class="p">:</span> <span class="n">total_params</span><span class="p">,</span>
+             <span class="s1">&#39;trainable_params&#39;</span><span class="p">:</span> <span class="n">total_trainable_params</span><span class="p">,</span>
+             <span class="s1">&#39;non-trainable_params&#39;</span><span class="p">:</span> <span class="n">total_params</span> <span class="o">-</span> <span class="n">total_trainable_params</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+671,302 total parameters.
+0.64M total parameters.
+662,096 training parameters.
+0.63M training parameters.
+</pre></div></div>
+</div>
+</section>
+<section id="Evaluation-and-plot-based-on-mclust">
+<h2>Evaluation and plot based on mclust<a class="headerlink" href="#Evaluation-and-plot-based-on-mclust" title="Link to this heading"></a></h2>
+<p>SpatialFuser provides an evaluation module, <em>metrics</em>, for assessing tissue domain detection tasks. It treats the Region column in anndata.obs as the ground truth and, based on the provided embed_label (an array stored in anndata.obsm), automatically computes five metrics (ARI, AMI, Homogeneity, Completeness, and V-Measure) under clustering methods including Leiden, Louvain, and Mclust.</p>
+<p>Here, we only present the spatial domains and Umap colored by Mclust.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="c1"># evaluate and plot</span>
+<span class="n">leiden_result</span><span class="p">,</span> <span class="n">louvain_result</span><span class="p">,</span> <span class="n">mclust_result</span> <span class="o">=</span> <span class="n">metrics</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span>
+                                                       <span class="n">save_loc</span><span class="o">=</span><span class="s1">&#39;_151672.png&#39;</span><span class="p">,</span>
+                                                       <span class="n">resolution</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+                                                       <span class="n">spot_size</span><span class="o">=</span><span class="mf">0.015</span><span class="p">,</span>
+                                                       <span class="n">cluster_label</span><span class="o">=</span><span class="s1">&#39;Region&#39;</span><span class="p">,</span>
+                                                       <span class="n">plot_color</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;mclust&quot;</span><span class="p">],</span>
+                                                       <span class="n">mclust_model</span><span class="o">=</span><span class="s1">&#39;EEE&#39;</span><span class="p">,</span>
+                                                       <span class="n">embed_label</span><span class="o">=</span><span class="s1">&#39;embedding&#39;</span><span class="p">,</span>
+                                                       <span class="n">vis</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                                       <span class="n">save</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2025-08-25 19:36:58.531929: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 AVX512F AVX512_VNNI FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2025-08-25 19:36:58.719774: I tensorflow/core/util/port.cc:104] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2025-08-25 19:37:00.167025: W tensorflow/compiler/xla/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#39;libnvinfer.so.7&#39;; dlerror: libnvinfer.so.7: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /home/whcai/anaconda3/envs/PyG/lib/python3.9/site-packages/cv2/../../lib64::/usr/local/cuda-12.4/lib64:/public8/lilab/student/whcai/myR/R-4.1.2/lib/
+2025-08-25 19:37:00.167182: W tensorflow/compiler/xla/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#39;libnvinfer_plugin.so.7&#39;; dlerror: libnvinfer_plugin.so.7: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /home/whcai/anaconda3/envs/PyG/lib/python3.9/site-packages/cv2/../../lib64::/usr/local/cuda-12.4/lib64:/public8/lilab/student/whcai/myR/R-4.1.2/lib/
+2025-08-25 19:37:00.167192: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Cannot dlopen some TensorRT libraries. If you would like to use Nvidia GPU with TensorRT, please make sure the missing libraries mentioned above are installed properly.
+R[write to console]: Package &#39;mclust&#39; version 6.0.1
+Type &#39;citation(&#34;mclust&#34;)&#39; for citing this R package in publications.
+
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+fitting ...
+  |======================================================================| 100%
+WARNING: saving figure to file figures/umap_151672.png
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/home/whcai/anaconda3/envs/PyG/lib/python3.9/site-packages/scanpy/plotting/_tools/scatterplots.py:394: UserWarning: No data for colormapping provided via &#39;c&#39;. Parameters &#39;cmap&#39; will be ignored
+  cax = scatter(
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/Tutorials_Fine_Spatial_Interpretation_1._10X_Visium_human_DLPFC_dataset_10X_Visium_DLPFC_11_3.png" src="../../../_images/Tutorials_Fine_Spatial_Interpretation_1._10X_Visium_human_DLPFC_dataset_10X_Visium_DLPFC_11_3.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+WARNING: saving figure to file figures/show_151672.png
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/Tutorials_Fine_Spatial_Interpretation_1._10X_Visium_human_DLPFC_dataset_10X_Visium_DLPFC_11_5.png" src="../../../_images/Tutorials_Fine_Spatial_Interpretation_1._10X_Visium_human_DLPFC_dataset_10X_Visium_DLPFC_11_5.png" />
+</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="Fine Spatial Interpretation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../2.%20osmFISH%20mouse%20somatosensory%20cortex%20dataset/osmFISH.html" class="btn btn-neutral float-right" title="2. osmFISH mouse somatosensory cortex datasets" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Wenhao Cai.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

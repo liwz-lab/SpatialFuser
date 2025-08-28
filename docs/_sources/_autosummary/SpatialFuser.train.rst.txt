@@ -1,0 +1,20 @@
+﻿SpatialFuser.train
+==================
+
+.. automodule:: SpatialFuser.train
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      train_emb
+      train_integration
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      emb_trainer
+      integration_trainer
+   

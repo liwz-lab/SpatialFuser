@@ -1,0 +1,41 @@
+API
+====
+
+
+Preparation
+------------
+
+.. autosummary::
+   :toctree: _autosummary
+
+   SpatialFuser.utils
+
+
+Data loader and Pre-processing
+-------------------------------
+
+.. autosummary::
+   :toctree: _autosummary
+
+   SpatialFuser.dataLoader
+   SpatialFuser.preMatch
+
+
+Training
+---------
+
+.. autosummary::
+   :toctree: _autosummary
+
+   SpatialFuser.train
+
+
+Evaluation and Visualization
+-----------------------------
+
+.. autosummary::
+   :toctree: _autosummary
+
+   SpatialFuser.enval
+   SpatialFuser.vis
+
