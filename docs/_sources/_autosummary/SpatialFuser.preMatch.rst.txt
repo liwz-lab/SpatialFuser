@@ -1,0 +1,26 @@
+﻿SpatialFuser.preMatch
+=====================
+
+.. automodule:: SpatialFuser.preMatch
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      alpha_shape
+      apply_transformation
+      compute_grids_score
+      icp
+      icp_pre_match
+      ndt_pre_match
+      plot_results
+      rotate_via_numpy
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      Grid
+      Grids
+   

@@ -1,0 +1,10 @@
+Fine Spatial Interpretation
+===========================
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Contents:
+
+   1. 10X Visium human DLPFC dataset/10X Visium DLPFC
+   2. osmFISH mouse somatosensory cortex dataset/osmFISH
+   3. CODEX human muscle-invasive bladder cancer tumor dataset/CODEX

@@ -1,0 +1,648 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2. Slices of different developmental stages &mdash; SpatialFuser v1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/nbsphinx-code-cells.css?v=2aa19091" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=5cb08e4e"></script>
+      <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="3. Spatial ATAC–RNA-seq dataset" href="../3.%20Spatial%20ATAC%E2%80%93RNA-seq%20dataset/Spatial%20ATAC-RNA-seq%20Integration.html" />
+    <link rel="prev" title="1. Adjacent slices" href="../1.%20Adjacent%20slices/BaristaSeq%20Alignment%20and%20Integration.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            SpatialFuser
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../Installation/contents.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../Fine%20Spatial%20Interpretation/index.html">Fine Spatial Interpretation</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Integration and Alignment</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../1.%20Adjacent%20slices/BaristaSeq%20Alignment%20and%20Integration.html">1. Adjacent slices</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">2. Slices of different developmental stages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Preparation">Preparation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Hyper-Parameters-setting">Hyper-Parameters setting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Load-data">Load data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Train">Train</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Spatial-domain-detection-after-integration">Spatial domain detection after integration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Batch-effect-correction">Batch effect correction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Show-alignment">Show alignment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Spots-mapping-accuracy">Spots mapping accuracy</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../3.%20Spatial%20ATAC%E2%80%93RNA-seq%20dataset/Spatial%20ATAC-RNA-seq%20Integration.html">3. Spatial ATAC–RNA-seq dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../4.%20Weakly%20correlated%20multi-omics%20datasets%20across%20different%20resolution/index.html">4. Weakly correlated multi-omics datasets across different resolution</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../API.html">API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">SpatialFuser</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Tutorials</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Integration and Alignment</a></li>
+      <li class="breadcrumb-item active">2. Slices of different developmental stages</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/Tutorials/Integration and Alignment/2. Slices of different developmental stages/Setero-seq Alignment and Integration.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="2.-Slices-of-different-developmental-stages">
+<h1>2. Slices of different developmental stages<a class="headerlink" href="#2.-Slices-of-different-developmental-stages" title="Link to this heading"></a></h1>
+<p>Integration and alignment of Stereo-seq data representing axolotl regenerative telencephalon at developmental stages 54 and 57</p>
+<p>The Stereo-seq axolotl regenerative telencephalon dataset includes 18 brain tissue slices with single-cell resolution, capturing over 20,000 genes across various stages of regeneration and development. Two slices from developmental stages 54 and 57, containing 2,929 and 4,410 spatial spots respectively, were selected for alignment and integration.</p>
+<section id="Preparation">
+<h2>Preparation<a class="headerlink" href="#Preparation" title="Link to this heading"></a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">spatialFuser</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scanpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sc</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;..&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/home/whcai/anaconda3/envs/PyG/lib/python3.9/site-packages/louvain/__init__.py:54: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools&lt;81.
+  from pkg_resources import get_distribution, DistributionNotFound
+</pre></div></div>
+</div>
+</section>
+<section id="Hyper-Parameters-setting">
+<h2>Hyper-Parameters setting<a class="headerlink" href="#Hyper-Parameters-setting" title="Link to this heading"></a></h2>
+<p>All hyperparameters are stored in the variable args. To display them during initialization, use the function call <em>args = def_training_args(show_detail=True)</em>.</p>
+<p>SpatialFuser employs two-layer MCGATE models with high latent dimension to learn data embeddings as Stereo-seq is high-throughput spatial technology.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load args:</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;============================================&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=              Setting Params              =&quot;</span><span class="p">)</span>
+<span class="n">slice_1_args</span> <span class="o">=</span> <span class="n">def_training_args</span><span class="p">()</span>
+<span class="n">slice_1_args</span><span class="o">.</span><span class="n">hidden</span> <span class="o">=</span> <span class="p">[</span><span class="mi">512</span><span class="p">,</span> <span class="mi">32</span><span class="p">]</span>
+<span class="n">slice_1_args</span><span class="o">.</span><span class="n">epochs</span> <span class="o">=</span> <span class="mi">500</span>
+<span class="n">slice_1_args</span><span class="o">.</span><span class="n">lr</span> <span class="o">=</span> <span class="mf">3e-4</span>
+<span class="n">slice_1_args</span><span class="o">.</span><span class="n">K</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">slice_1_args</span><span class="o">.</span><span class="n">heads</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">slice_1_args</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">slice_2_args</span> <span class="o">=</span> <span class="n">def_training_args</span><span class="p">()</span>
+<span class="n">slice_2_args</span><span class="o">.</span><span class="n">hidden</span> <span class="o">=</span> <span class="p">[</span><span class="mi">512</span><span class="p">,</span> <span class="mi">32</span><span class="p">]</span>
+<span class="n">slice_2_args</span><span class="o">.</span><span class="n">epochs</span> <span class="o">=</span> <span class="mi">500</span>
+<span class="n">slice_2_args</span><span class="o">.</span><span class="n">lr</span> <span class="o">=</span> <span class="mf">3e-4</span>
+<span class="n">slice_2_args</span><span class="o">.</span><span class="n">K</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">slice_2_args</span><span class="o">.</span><span class="n">heads</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">slice_2_args</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">integration_args</span> <span class="o">=</span> <span class="n">def_training_args</span><span class="p">()</span>
+<span class="n">integration_args</span><span class="o">.</span><span class="n">hidden</span> <span class="o">=</span> <span class="p">[</span><span class="mi">32</span><span class="p">,</span> <span class="mi">32</span><span class="p">]</span>
+<span class="n">integration_args</span><span class="o">.</span><span class="n">fusion_epoch</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="n">integration_args</span><span class="o">.</span><span class="n">lr</span> <span class="o">=</span> <span class="mf">5e-3</span>
+<span class="n">integration_args</span><span class="o">.</span><span class="n">match_step_size</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">integration_args</span><span class="o">.</span><span class="n">tau</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">integration_args</span><span class="o">.</span><span class="n">roi_radius</span> <span class="o">=</span> <span class="mf">0.15</span>
+<span class="n">integration_args</span><span class="o">.</span><span class="n">epsilon</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">integration_args</span><span class="o">.</span><span class="n">m_top_K</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">integration_args</span><span class="o">.</span><span class="n">beta_rec</span> <span class="o">=</span> <span class="mi">60</span>
+<span class="n">integration_args</span><span class="o">.</span><span class="n">beta_dir</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+============================================
+=              Setting Params              =
+</pre></div></div>
+</div>
+</section>
+<section id="Load-data">
+<h2>Load data<a class="headerlink" href="#Load-data" title="Link to this heading"></a></h2>
+<p>SpatialFuser provides a built-in data loading and preprocessing module, <em>SpatialFuserDataLoader</em>. The required inputs include hyperparameters, data_dir (the dataset storage directory), data_tech (either “seq-based” or “image-based”), and files (a list of h5ad files to be loaded).</p>
+<p>For spatial omics data, <em>SpatialFuserDataLoader</em> constructs a KNN adjacency graph based on the specified value of K to support graph neural network training.</p>
+<p>For seq-based data, spatially variable genes are extracted according to n_svgs to simplify the model.</p>
+<p>For the Stereo-seq axolotl regenerative telencephalon dataset, we used the intersection of SVGs from two slices as the input features for the model.</p>
+<p>All AnnData objects are normalized, log-transformed, and subsequently converted into PyG objects for model input.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load data:</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;============================================&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=               Loading Data               =&quot;</span><span class="p">)</span>
+<span class="n">slice_1_dataLoader</span> <span class="o">=</span> <span class="n">SpatialFuserDataLoader</span><span class="p">(</span><span class="n">slice_1_args</span><span class="p">,</span>
+                                            <span class="n">data_dir</span><span class="o">=</span><span class="s1">&#39;/public8/lilab/student/whcai/Integration/data/Stereo-seq_Axolotl_Brain&#39;</span><span class="p">,</span>
+                                            <span class="n">data_tech</span><span class="o">=</span><span class="s1">&#39;seq-based&#39;</span><span class="p">,</span>
+                                            <span class="n">files</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Stereo-seq_wei2022single_Stage54_data.h5ad&#39;</span><span class="p">])</span>
+<span class="n">slice_1_dataLoader</span><span class="o">.</span><span class="n">load_adata</span><span class="p">()</span>
+<span class="n">slice_1_dataLoader</span><span class="o">.</span><span class="n">pre_processing</span><span class="p">(</span><span class="n">n_svgs</span><span class="o">=</span><span class="mi">3000</span><span class="p">,</span> <span class="n">k_cutoff</span><span class="o">=</span><span class="n">slice_1_args</span><span class="o">.</span><span class="n">K</span><span class="p">,</span> <span class="n">batch_label</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="n">slice_2_dataLoader</span> <span class="o">=</span> <span class="n">SpatialFuserDataLoader</span><span class="p">(</span><span class="n">slice_2_args</span><span class="p">,</span>
+                                            <span class="n">data_dir</span><span class="o">=</span><span class="s1">&#39;/public8/lilab/student/whcai/Integration/data/Stereo-seq_Axolotl_Brain&#39;</span><span class="p">,</span>
+                                            <span class="n">data_tech</span><span class="o">=</span><span class="s1">&#39;seq-based&#39;</span><span class="p">,</span>
+                                            <span class="n">files</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Stereo-seq_wei2022single_Stage57_data.h5ad&#39;</span><span class="p">])</span>
+<span class="n">slice_2_dataLoader</span><span class="o">.</span><span class="n">load_adata</span><span class="p">()</span>
+<span class="n">slice_2_dataLoader</span><span class="o">.</span><span class="n">pre_processing</span><span class="p">(</span><span class="n">n_svgs</span><span class="o">=</span><span class="mi">3000</span><span class="p">,</span> <span class="n">k_cutoff</span><span class="o">=</span><span class="n">slice_2_args</span><span class="o">.</span><span class="n">K</span><span class="p">,</span> <span class="n">batch_label</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+
+<span class="n">highly_variable_1</span> <span class="o">=</span> <span class="n">slice_1_dataLoader</span><span class="o">.</span><span class="n">adata</span><span class="o">.</span><span class="n">var</span><span class="p">[</span><span class="n">slice_1_dataLoader</span><span class="o">.</span><span class="n">adata</span><span class="o">.</span><span class="n">var</span><span class="p">[</span><span class="s1">&#39;highly_variable&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">index</span>
+<span class="n">highly_variable_2</span> <span class="o">=</span> <span class="n">slice_2_dataLoader</span><span class="o">.</span><span class="n">adata</span><span class="o">.</span><span class="n">var</span><span class="p">[</span><span class="n">slice_2_dataLoader</span><span class="o">.</span><span class="n">adata</span><span class="o">.</span><span class="n">var</span><span class="p">[</span><span class="s1">&#39;highly_variable&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">index</span>
+
+<span class="c1"># find same SVGs</span>
+<span class="n">intersection_genes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">intersect1d</span><span class="p">(</span><span class="n">highly_variable_1</span><span class="p">,</span> <span class="n">highly_variable_2</span><span class="p">)</span>
+<span class="n">slice_1_dataLoader</span><span class="o">.</span><span class="n">adata</span><span class="o">.</span><span class="n">var</span><span class="p">[</span><span class="s1">&#39;inter_SVGs&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">slice_1_dataLoader</span><span class="o">.</span><span class="n">adata</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">intersection_genes</span><span class="p">,</span> <span class="s1">&#39;inter_SVGs&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">slice_2_dataLoader</span><span class="o">.</span><span class="n">adata</span><span class="o">.</span><span class="n">var</span><span class="p">[</span><span class="s1">&#39;inter_SVGs&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">slice_2_dataLoader</span><span class="o">.</span><span class="n">adata</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">intersection_genes</span><span class="p">,</span> <span class="s1">&#39;inter_SVGs&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">slice_1_dataLoader</span><span class="o">.</span><span class="n">adata</span> <span class="o">=</span> <span class="n">slice_1_dataLoader</span><span class="o">.</span><span class="n">adata</span><span class="p">[:,</span> <span class="n">intersection_genes</span><span class="p">]</span>
+<span class="n">slice_2_dataLoader</span><span class="o">.</span><span class="n">adata</span> <span class="o">=</span> <span class="n">slice_2_dataLoader</span><span class="o">.</span><span class="n">adata</span><span class="p">[:,</span> <span class="n">intersection_genes</span><span class="p">]</span>
+
+<span class="c1"># anndata to PyG object</span>
+<span class="n">slice_1_dataLoader</span><span class="o">.</span><span class="n">generate_minibatch</span><span class="p">(</span><span class="n">loader_type</span><span class="o">=</span><span class="s1">&#39;RandomNodeLoader&#39;</span><span class="p">,</span> <span class="n">num_workers</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">slice_1_dataLoader</span><span class="o">.</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;Region&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">slice_1_dataLoader</span><span class="o">.</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;Annotation&#39;</span><span class="p">]</span>
+<span class="n">slice_2_dataLoader</span><span class="o">.</span><span class="n">generate_minibatch</span><span class="p">(</span><span class="n">loader_type</span><span class="o">=</span><span class="s1">&#39;RandomNodeLoader&#39;</span><span class="p">,</span> <span class="n">num_workers</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">slice_2_dataLoader</span><span class="o">.</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;Region&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">slice_2_dataLoader</span><span class="o">.</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;Annotation&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+============================================
+=               Loading Data               =
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/home/whcai/anaconda3/envs/PyG/lib/python3.9/site-packages/scanpy/preprocessing/_highly_variable_genes.py:61: UserWarning: `flavor=&#39;seurat_v3&#39;` expects raw count data, but non-integers were found.
+  warnings.warn(
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+=         Calculating spatial graph        =
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/home/whcai/anaconda3/envs/PyG/lib/python3.9/site-packages/scanpy/preprocessing/_highly_variable_genes.py:61: UserWarning: `flavor=&#39;seurat_v3&#39;` expects raw count data, but non-integers were found.
+  warnings.warn(
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+=         Calculating spatial graph        =
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/tmp/ipykernel_32120/3314877572.py:23: ImplicitModificationWarning: Trying to modify attribute `.var` of view, initializing view as actual.
+  slice_1_dataLoader.adata.var[&#39;inter_SVGs&#39;] = False
+/tmp/ipykernel_32120/3314877572.py:25: ImplicitModificationWarning: Trying to modify attribute `.var` of view, initializing view as actual.
+  slice_2_dataLoader.adata.var[&#39;inter_SVGs&#39;] = False
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+The PyG data u create is qualified
+=The graph contains 14645 edges, 2929 cells=
+=   5.0000 neighbors per cell on average   =
+=              subgraph Info             =
+============================================
+=           Batch 0: 2929 nodes           =
+=   4.0000 neighbors per cell on average   =
+batch:[1.], node num:[2929]
+============================================
+The PyG data u create is qualified
+=The graph contains 22050 edges, 4410 cells=
+=   5.0000 neighbors per cell on average   =
+=              subgraph Info             =
+============================================
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/tmp/ipykernel_32120/3314877572.py:32: ImplicitModificationWarning: Trying to modify attribute `.obs` of view, initializing view as actual.
+  slice_1_dataLoader.adata.obs[&#39;Region&#39;] = slice_1_dataLoader.adata.obs[&#39;Annotation&#39;]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+=           Batch 0: 4410 nodes           =
+=   4.0000 neighbors per cell on average   =
+batch:[2.], node num:[4410]
+============================================
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/tmp/ipykernel_32120/3314877572.py:34: ImplicitModificationWarning: Trying to modify attribute `.obs` of view, initializing view as actual.
+  slice_2_dataLoader.adata.obs[&#39;Region&#39;] = slice_2_dataLoader.adata.obs[&#39;Annotation&#39;]
+</pre></div></div>
+</div>
+</section>
+<section id="Train">
+<h2>Train<a class="headerlink" href="#Train" title="Link to this heading"></a></h2>
+<p>The MCGATEs are first pre-trained individually, after which the fusion layer and matching layer are incorporated into the training process.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="c1"># train</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;============================================&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=              Begin to Train              =&quot;</span><span class="p">)</span>
+<span class="n">training_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="p">[</span><span class="n">adata1</span><span class="p">,</span> <span class="n">adata2</span><span class="p">],</span> <span class="n">trainer</span> <span class="o">=</span> <span class="n">train_integration</span><span class="p">([</span><span class="n">slice_1_args</span><span class="p">,</span> <span class="n">slice_2_args</span><span class="p">,</span> <span class="n">integration_args</span><span class="p">],</span>
+                                              <span class="p">[</span><span class="n">slice_1_dataLoader</span><span class="p">,</span> <span class="n">slice_2_dataLoader</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=            Training Finished!            =&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total time elapsed: </span><span class="si">{:.4f}</span><span class="s2">s&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">training_time</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;============================================&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+============================================
+=              Begin to Train              =
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/public8/lilab/student/whcai/Integration/model/SpatialFuser/spatialFuser/train.py:137: UserWarning: torch.sparse.SparseTensor(indices, values, shape, *, device=) is deprecated.  Please use torch.sparse_coo_tensor(indices, values, shape, dtype=, device=). (Triggered internally at ../torch/csrc/utils/tensor_new.cpp:605.)
+  self.adata1_adata2atial_adj = torch.sparse.FloatTensor(batch_in_data1.edge_index,
+Epoch 500 || adata1_pretrain_loss: 0.1709 || adata2_pretrain_loss: 0.1411 || : 100%|██| 500/500 [00:26&lt;00:00, 18.92it/s]
+Epoch 200 || Fusion_loss : 0.3371 || MSE_loss: 0.3147 || Dir_loss: 0.0966 || : 100%|██| 200/200 [00:12&lt;00:00, 16.33it/s]
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+=            Training Finished!            =
+Total time elapsed: 39.9277s
+============================================
+</pre></div></div>
+</div>
+</section>
+<section id="Spatial-domain-detection-after-integration">
+<h2>Spatial domain detection after integration<a class="headerlink" href="#Spatial-domain-detection-after-integration" title="Link to this heading"></a></h2>
+<p>SpatialFuser provides an evaluation module, <em>metrics</em>, for assessing tissue domain detection tasks. It treats the Region column in anndata.obs as the ground truth and, based on the provided embed_label (an array stored in anndata.obsm), automatically computes five metrics (ARI, AMI, Homogeneity, Completeness, and V-Measure) under clustering methods including Leiden, Louvain, and Mclust.</p>
+<p>Here, we only present the spatial domains and Umap colored by Mclust. The original annotations were used as references for evaluation.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="c1"># spatial domain detection</span>
+<span class="n">adata1_leiden_result</span><span class="p">,</span> <span class="n">adata1_louvain_result</span><span class="p">,</span> <span class="n">adata1_mclust_result</span> <span class="o">=</span> <span class="n">metrics</span><span class="p">(</span><span class="n">adata1</span><span class="p">,</span>
+                                                                            <span class="n">save_loc</span><span class="o">=</span><span class="s1">&#39;_Stereo-Seq_stage54.png&#39;</span><span class="p">,</span>
+                                                                            <span class="n">resolution</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+                                                                            <span class="n">spot_size</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span>
+                                                                            <span class="n">cluster_label</span><span class="o">=</span><span class="s1">&#39;Region&#39;</span><span class="p">,</span>
+                                                                            <span class="n">plot_color</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;mclust&quot;</span><span class="p">],</span>
+                                                                            <span class="n">mclust_model</span><span class="o">=</span><span class="s1">&#39;EEE&#39;</span><span class="p">,</span>
+                                                                            <span class="n">embed_label</span><span class="o">=</span><span class="s1">&#39;fused_embedding&#39;</span><span class="p">,</span>
+                                                                            <span class="n">vis</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                                                            <span class="n">save</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">adata2_leiden_result</span><span class="p">,</span> <span class="n">adata2_louvain_result</span><span class="p">,</span> <span class="n">adata2_mclust_result</span> <span class="o">=</span> <span class="n">metrics</span><span class="p">(</span><span class="n">adata2</span><span class="p">,</span>
+                                                                            <span class="n">save_loc</span><span class="o">=</span><span class="s1">&#39;_Stereo-Seq_stage57.png&#39;</span><span class="p">,</span>
+                                                                            <span class="n">resolution</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+                                                                            <span class="n">spot_size</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span>
+                                                                            <span class="n">cluster_label</span><span class="o">=</span><span class="s1">&#39;Region&#39;</span><span class="p">,</span>
+                                                                            <span class="n">plot_color</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;mclust&quot;</span><span class="p">],</span>
+                                                                            <span class="n">mclust_model</span><span class="o">=</span><span class="s1">&#39;EEE&#39;</span><span class="p">,</span>
+                                                                            <span class="n">embed_label</span><span class="o">=</span><span class="s1">&#39;fused_embedding&#39;</span><span class="p">,</span>
+                                                                            <span class="n">vis</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                                                            <span class="n">save</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2025-08-25 20:17:47.202248: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 AVX512F AVX512_VNNI FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2025-08-25 20:17:47.406564: I tensorflow/core/util/port.cc:104] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2025-08-25 20:17:49.268331: W tensorflow/compiler/xla/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#39;libnvinfer.so.7&#39;; dlerror: libnvinfer.so.7: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /home/whcai/anaconda3/envs/PyG/lib/python3.9/site-packages/cv2/../../lib64::/usr/local/cuda-12.4/lib64:/public8/lilab/student/whcai/myR/R-4.1.2/lib/
+2025-08-25 20:17:49.268574: W tensorflow/compiler/xla/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#39;libnvinfer_plugin.so.7&#39;; dlerror: libnvinfer_plugin.so.7: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /home/whcai/anaconda3/envs/PyG/lib/python3.9/site-packages/cv2/../../lib64::/usr/local/cuda-12.4/lib64:/public8/lilab/student/whcai/myR/R-4.1.2/lib/
+2025-08-25 20:17:49.268593: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Cannot dlopen some TensorRT libraries. If you would like to use Nvidia GPU with TensorRT, please make sure the missing libraries mentioned above are installed properly.
+R[write to console]: Package &#39;mclust&#39; version 6.0.1
+Type &#39;citation(&#34;mclust&#34;)&#39; for citing this R package in publications.
+
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+fitting ...
+  |======================================================================| 100%
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/home/whcai/anaconda3/envs/PyG/lib/python3.9/site-packages/scanpy/plotting/_tools/scatterplots.py:394: UserWarning: No data for colormapping provided via &#39;c&#39;. Parameters &#39;cmap&#39; will be ignored
+  cax = scatter(
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/Tutorials_Integration_and_Alignment_2._Slices_of_different_developmental_stages_Setero-seq_Alignment_and_Integration_9_3.png" src="../../../_images/Tutorials_Integration_and_Alignment_2._Slices_of_different_developmental_stages_Setero-seq_Alignment_and_Integration_9_3.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/Tutorials_Integration_and_Alignment_2._Slices_of_different_developmental_stages_Setero-seq_Alignment_and_Integration_9_4.png" src="../../../_images/Tutorials_Integration_and_Alignment_2._Slices_of_different_developmental_stages_Setero-seq_Alignment_and_Integration_9_4.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+fitting ...
+  |======================================================================| 100%
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/home/whcai/anaconda3/envs/PyG/lib/python3.9/site-packages/scanpy/plotting/_tools/scatterplots.py:394: UserWarning: No data for colormapping provided via &#39;c&#39;. Parameters &#39;cmap&#39; will be ignored
+  cax = scatter(
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/Tutorials_Integration_and_Alignment_2._Slices_of_different_developmental_stages_Setero-seq_Alignment_and_Integration_9_7.png" src="../../../_images/Tutorials_Integration_and_Alignment_2._Slices_of_different_developmental_stages_Setero-seq_Alignment_and_Integration_9_7.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/Tutorials_Integration_and_Alignment_2._Slices_of_different_developmental_stages_Setero-seq_Alignment_and_Integration_9_8.png" src="../../../_images/Tutorials_Integration_and_Alignment_2._Slices_of_different_developmental_stages_Setero-seq_Alignment_and_Integration_9_8.png" />
+</div>
+</div>
+</section>
+<section id="Batch-effect-correction">
+<h2>Batch effect correction<a class="headerlink" href="#Batch-effect-correction" title="Link to this heading"></a></h2>
+<p>UMAP visualizations colored by ground truth annotation (left) and batches (right), illustrating that the model preserves true biological differences while achieving effective integration.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="c1"># batch effect correction (integration)</span>
+<span class="n">checkBatch</span><span class="p">(</span><span class="n">adata1</span><span class="p">,</span> <span class="n">adata2</span><span class="p">,</span> <span class="n">save</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/home/whcai/anaconda3/envs/PyG/lib/python3.9/site-packages/scanpy/plotting/_tools/scatterplots.py:394: UserWarning: No data for colormapping provided via &#39;c&#39;. Parameters &#39;cmap&#39; will be ignored
+  cax = scatter(
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/Tutorials_Integration_and_Alignment_2._Slices_of_different_developmental_stages_Setero-seq_Alignment_and_Integration_11_1.png" src="../../../_images/Tutorials_Integration_and_Alignment_2._Slices_of_different_developmental_stages_Setero-seq_Alignment_and_Integration_11_1.png" />
+</div>
+</div>
+</section>
+<section id="Show-alignment">
+<h2>Show alignment<a class="headerlink" href="#Show-alignment" title="Link to this heading"></a></h2>
+<p>Alignment across slices, colored by region labels (300 alignment pairs shown for clarity)</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="c1"># show alignment</span>
+<span class="n">adata1_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;index&#39;</span><span class="p">:</span> <span class="nb">range</span><span class="p">(</span><span class="n">adata1</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+                          <span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">adata1</span><span class="o">.</span><span class="n">obsm</span><span class="p">[</span><span class="s1">&#39;spatial&#39;</span><span class="p">][:,</span> <span class="mi">0</span><span class="p">],</span>
+                          <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">adata1</span><span class="o">.</span><span class="n">obsm</span><span class="p">[</span><span class="s1">&#39;spatial&#39;</span><span class="p">][:,</span> <span class="mi">1</span><span class="p">],</span>
+                          <span class="s1">&#39;celltype&#39;</span><span class="p">:</span> <span class="n">adata1</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;Region&#39;</span><span class="p">]})</span>
+<span class="n">adata2_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;index&#39;</span><span class="p">:</span> <span class="nb">range</span><span class="p">(</span><span class="n">adata2</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+                          <span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">adata2</span><span class="o">.</span><span class="n">obsm</span><span class="p">[</span><span class="s1">&#39;spatial&#39;</span><span class="p">][:,</span> <span class="mi">0</span><span class="p">],</span>
+                          <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">adata2</span><span class="o">.</span><span class="n">obsm</span><span class="p">[</span><span class="s1">&#39;spatial&#39;</span><span class="p">][:,</span> <span class="mi">1</span><span class="p">],</span>
+                          <span class="s1">&#39;celltype&#39;</span><span class="p">:</span> <span class="n">adata2</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;Region&#39;</span><span class="p">]})</span>
+<span class="n">matching</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">trainer</span><span class="o">.</span><span class="n">match_in_adata1</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="n">trainer</span><span class="o">.</span><span class="n">match_in_adata2</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()])</span>
+<span class="n">multi_align</span> <span class="o">=</span> <span class="n">match_3D_multi</span><span class="p">(</span><span class="n">adata1_df</span><span class="p">,</span> <span class="n">adata2_df</span><span class="p">,</span> <span class="n">matching</span><span class="p">,</span> <span class="n">meta</span><span class="o">=</span><span class="s1">&#39;celltype&#39;</span><span class="p">,</span>
+                             <span class="n">scale_coordinate</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">subsample_size</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">exchange_xy</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">multi_align</span><span class="o">.</span><span class="n">draw_3D</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="s1">&#39;all_type&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="n">line_width</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">point_size</span><span class="o">=</span><span class="p">[</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">],</span> <span class="n">line_color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span>
+                    <span class="n">hide_axis</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_error</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">only_show_correct</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">only_show_error</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                    <span class="n">line_alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+dataset1: 16 cell types; dataset2: 17 cell types;
+                    Total :18 celltypes; Overlap: 15 cell types
+                    Not overlap :[[&#39;Immature DMIN&#39;, &#39;MSN&#39;, &#39;nptxEX&#39;]]
+Subsampled 300 pairs from 661
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/Tutorials_Integration_and_Alignment_2._Slices_of_different_developmental_stages_Setero-seq_Alignment_and_Integration_13_1.png" src="../../../_images/Tutorials_Integration_and_Alignment_2._Slices_of_different_developmental_stages_Setero-seq_Alignment_and_Integration_13_1.png" />
+</div>
+</div>
+</section>
+<section id="Spots-mapping-accuracy">
+<h2>Spots mapping accuracy<a class="headerlink" href="#Spots-mapping-accuracy" title="Link to this heading"></a></h2>
+<p>The all_matching function returns two plots:</p>
+<ol class="arabic simple">
+<li><p>A Sankey plot illustrating spots type correspondence based on alignments from SpatialFuser.</p></li>
+<li><p>A histogram showing the similarity score distributions from random matching (bottom) and SpatialFuser matching (top) in pairwise alignments.</p></li>
+</ol>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="c1"># evaluate alignment</span>
+<span class="n">valid_ratio</span><span class="p">,</span> <span class="n">accuracy</span> <span class="o">=</span> <span class="n">all_matching</span><span class="p">(</span><span class="n">adata1</span><span class="p">,</span> <span class="n">adata2</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="n">save_loc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">file_name</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+QC threshold：0.95%  -&gt; 0.8067
+valid matching ratio：99.4% (2910/2929)
+spots mapping acc：62.03% (1805/2910)
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/Tutorials_Integration_and_Alignment_2._Slices_of_different_developmental_stages_Setero-seq_Alignment_and_Integration_15_1.png" src="../../../_images/Tutorials_Integration_and_Alignment_2._Slices_of_different_developmental_stages_Setero-seq_Alignment_and_Integration_15_1.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/Tutorials_Integration_and_Alignment_2._Slices_of_different_developmental_stages_Setero-seq_Alignment_and_Integration_15_2.png" src="../../../_images/Tutorials_Integration_and_Alignment_2._Slices_of_different_developmental_stages_Setero-seq_Alignment_and_Integration_15_2.png" />
+</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../1.%20Adjacent%20slices/BaristaSeq%20Alignment%20and%20Integration.html" class="btn btn-neutral float-left" title="1. Adjacent slices" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../3.%20Spatial%20ATAC%E2%80%93RNA-seq%20dataset/Spatial%20ATAC-RNA-seq%20Integration.html" class="btn btn-neutral float-right" title="3. Spatial ATAC–RNA-seq dataset" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Wenhao Cai.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

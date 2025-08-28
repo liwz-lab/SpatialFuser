@@ -1,0 +1,21 @@
+﻿SpatialFuser.vis
+================
+
+.. automodule:: SpatialFuser.vis
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      checkBatch
+      matching_score
+      vis_global_att
+      visualize_loss
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      match_3D_multi
+   

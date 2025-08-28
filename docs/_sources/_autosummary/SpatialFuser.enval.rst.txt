@@ -1,0 +1,16 @@
+﻿SpatialFuser.enval
+==================
+
+.. automodule:: SpatialFuser.enval
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      all_matching
+      mclust_R
+      metrics
+      show_para_num
+      trajectory_analysis
+   

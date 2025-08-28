@@ -1,0 +1,37 @@
+Installation
+==================
+First clone the repository.
+
+.. code-block:: python
+
+   git clone https://github.com/liwz-lab/SpatialFuser.git
+   cd SpatialFuser
+
+It's recommended to create a separate conda environment for installing and running SpatialFuser:
+
+.. code-block:: python
+
+   #create an environment called env_SpatialFuser
+   conda create -n env_SpatialFuser python=3.9.18
+
+   #activate your environment
+   conda activate env_SpatialFuser
+
+Install all the required packages.
+
+.. code-block:: python
+
+   pip install -r requirements.txt
+
+The torch-geometric library is also required, please see the installation steps in https://github.com/pyg-team/pytorch_geometric#installation
+
+The use of the mclust algorithm requires the rpy2 package (Python) and the mclust package (R). See https://pypi.org/project/rpy2/ and https://cran.r-project.org/web/packages/mclust/index.html for detail.
+	
+Install env_SpatialFuser.
+	
+.. code-block:: python
+
+   python setup.py build
+   python setup.py install
+
+   

@@ -1,0 +1,11 @@
+Integration and Alignment
+=========================
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Contents:
+
+   1. Adjacent slices/BaristaSeq Alignment and Integration
+   2. Slices of different developmental stages/Setero-seq Alignment and Integration
+   3. Spatial ATAC–RNA-seq dataset/Spatial ATAC-RNA-seq Integration
+   4. Weakly correlated multi-omics datasets across different resolution/index

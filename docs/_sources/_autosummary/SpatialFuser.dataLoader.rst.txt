@@ -1,0 +1,13 @@
+﻿SpatialFuser.dataLoader
+=======================
+
+.. automodule:: SpatialFuser.dataLoader
+
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      H5adLoader
+      SpatialFuserDataLoader
+   
