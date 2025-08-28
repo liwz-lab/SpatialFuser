@@ -65,7 +65,7 @@ Tutorial of SpatialFuser is [here](https://liwz-lab.github.io/SpatialFuser/).
 
 ## Support
 
-If you have any questions, please feel free to [contact us](liweizhong@mail.sysu.edu.cn). 
+If you have any questions, please feel free to [contact us](mailto:liweizhong@mail.sysu.edu.cn). 
 
 ## Citation
 
