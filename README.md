@@ -59,7 +59,7 @@ python setup.py build
 python setup.py install
 ```
 
-## [Tutorial](https://liwz-lab.github.io/SpatialFuser/)
+## Tutorial
 
 Tutorial of SpatialFuser is [here](https://liwz-lab.github.io/SpatialFuser/).
 
